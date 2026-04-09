@@ -2,37 +2,64 @@
 
 A native macOS MQTT client built with SwiftUI.
 
-> **This project is under active development and not yet publicly released.**
-> When it's ready, it will be available here as a free download.
+**This project is under active development and not yet publicly released.**
+When it's ready, it will be available here as a free download.
 
 ---
 
-## Features
+## Stage 1. Foundation
 
-- **Multiple simultaneous connections** — connect to several brokers at once, each in its own tab
-- **Live topic tree** — topics populate in real time as messages arrive, organized in a collapsible tree
-- **Message history** — per-topic message log with timestamps, configurable history size
-- **Publish messages** — send payloads with QoS and retain flag control
-- **Broker info** — quick overview of broker version, uptime, and connected clients
-- **Topic filtering** — filter the tree by topic name as you type
-- **Data export** — export the full topic tree or individual message history to JSON or CSV
-- **Keyboard-first** — full keyboard navigation, configurable shortcuts (Cmd+K, Cmd+N, Cmd+T, Cmd+E, Cmd+L)
-- **Light & dark mode** — native macOS appearance
-- **Truly native** — built entirely with SwiftUI, no Electron, no web views
+Single broker connection with a live topic tree, message history, and data export.
+
+**Features:**
+- Connect to an MQTT broker (with optional TLS)
+- Live topic tree that populates in real time as messages arrive
+- Per-topic message history with timestamps and configurable size limit
+- Publish messages with QoS and retain flag control
+- Broker info panel (version, uptime, connected clients)
+- Topic filtering by name + regex
+- Export the full topic tree or message history to CSV
+- Full keyboard navigation with configurable shortcuts
+- System theme
+- Truly native — built entirely with SwiftUI, no Electron, no web views
+
+---
+
+## Stage 2. Multiple connections
+
+Support for several brokers open at the same time, each in its own tab.
+
+**Planned:**
+- Multiple parallel connections
+- Per-connection topic trees
+- Compare Trees — side-by-side diff of two broker topic trees
+
+---
+
+## Stage 3. Alerts & rules
+
+Trigger notifications based on topic values.
+
+**Planned:**
+- Alert rules: topic pattern, condition, action
+- macOS notifications
+- Rule management UI
+
+---
+
+## Stage 4. Polish & release 📋
+
+**Planned:**
+- TLS certificate support
+- Apple Help integration
+- App Store release
+
+---
 
 ## Requirements
 
 - macOS 15 or later
 - Apple Silicon or Intel
-
-## Status
-
-| Stage | Description | Status |
-|-------|-------------|--------|
-| 1 | Single connection, topic tree, message history, export, keyboard shortcuts | ✅ Complete |
-| 2 | Multiple parallel connections, Compare Trees | 🔄 In progress |
-| 3 | Alert rules, notifications | 📋 Planned |
-| 4 | TLS certificates, Apple Help, App Store release | 📋 Planned |
 
 ## Built with
 
@@ -44,4 +71,4 @@ A native macOS MQTT client built with SwiftUI.
 
 ---
 
-*Made by [@lukjasin](https://github.com/lukjasin)*
+lukjasin
