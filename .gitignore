@@ -1,0 +1,26 @@
+# Xcode build
+build/
+DerivedData/
+*.xcarchive
+
+# Xcode user data
+*.xcuserstate
+xcuserdata/
+*.xcuserdatad/
+
+# App bundle i dystrybucja
+*.app/
+*.dmg
+*.zip
+*.ipa
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
