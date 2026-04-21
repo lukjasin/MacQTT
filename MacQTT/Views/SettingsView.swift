@@ -16,6 +16,7 @@ struct SettingsView: View {
     @AppStorage("keyboardNavigationEnabled") var keyboardNavigationEnabled: Bool = true
     @AppStorage("cmdCCopiesValue") var cmdCCopiesValue: Bool = true
     @AppStorage("cmdEnterPublishes") var cmdEnterPublishes: Bool = false
+    @AppStorage("filterCaseSensitive") var filterCaseSensitive: Bool = false
     @AppStorage("wrapHistoryMessages") var wrapHistoryMessages: Bool = true
     @AppStorage("syntaxHighlighting") var syntaxHighlighting: Bool = true
 
@@ -25,6 +26,7 @@ struct SettingsView: View {
                 Toggle("Show messages in tree view", isOn: $showMessagesInTree)
                 Toggle("Highlight rows on update", isOn: $highlightOnUpdate)
                 Toggle("Show subtopic and message count badges", isOn: $showCountBadges)
+                Toggle("Case-sensitive filter", isOn: $filterCaseSensitive)
             }
             Section("Message History") {
                 Toggle("Wrap messages in history", isOn: $wrapHistoryMessages)

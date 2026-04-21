@@ -29,7 +29,12 @@ class MQTTService {
 
         if useTLS {
             client.enableSSL = true
+            client.allowUntrustCACertificate = true
+            client.didReceiveTrust = { _, _, completionHandler in
+                completionHandler(true)
+            }
         }
+
 
         var tempContinuation: AsyncStream<(topic: String, payload: String)>.Continuation?
         messageStream = AsyncStream { continuation in
@@ -41,15 +46,21 @@ class MQTTService {
     func connect() {
         let del = BridgeDelegate(
             onConnected: { [weak self] in
-                self?.client.subscribe("#")
-                self?.client.subscribe("$SYS/#")
-                self?.onConnectionStateChanged?(true)
+                Task { @MainActor [weak self] in
+                    self?.client.subscribe("#")
+                    self?.client.subscribe("$SYS/#")
+                    self?.onConnectionStateChanged?(true)
+                }
             },
             onDisconnected: { [weak self] in
-                self?.onConnectionStateChanged?(false)
+                Task { @MainActor [weak self] in
+                    self?.onConnectionStateChanged?(false)
+                }
             },
             onMessage: { [weak self] topic, payload in
-                self?.receive(topic: topic, payload: payload)
+                Task { @MainActor [weak self] in
+                    self?.receive(topic: topic, payload: payload)
+                }
             }
         )
         bridgeDelegate = del
@@ -72,7 +83,6 @@ class MQTTService {
     }
 }
 
-@MainActor
 private class BridgeDelegate: NSObject, CocoaMQTTDelegate {
     private let onConnected: () -> Void
     private let onDisconnected: () -> Void

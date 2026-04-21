@@ -24,3 +24,6 @@ xcuserdata/
 # Python
 __pycache__/
 *.pyc
+
+# Notatki robocze
+notes.txt

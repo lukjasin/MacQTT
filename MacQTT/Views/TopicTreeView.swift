@@ -20,6 +20,7 @@ struct TopicTreeView: View {
     @AppStorage("searchHistory") private var searchHistoryData: String = "[]"
     @AppStorage("keyboardNavigationEnabled") var keyboardNavigationEnabled: Bool = true
     @AppStorage("cmdCCopiesValue") var cmdCCopiesValue: Bool = true
+    @AppStorage("filterCaseSensitive") var filterCaseSensitive: Bool = false
     @State private var searchText: String = ""
     @State private var expandedPaths: Set<String> = []
     @FocusState private var searchFocused: Bool
@@ -258,10 +259,17 @@ struct TopicTreeView: View {
     }
 
     private func matches(path: String, pattern: String) -> Bool {
-        if let regex = try? Regex(pattern) {
-            return (try? regex.firstMatch(in: path)) != nil
+        if filterCaseSensitive {
+            if let regex = try? Regex(pattern) {
+                return (try? regex.firstMatch(in: path)) != nil
+            }
+            return path.contains(pattern)
+        } else {
+            if let regex = try? Regex(pattern).ignoresCase() {
+                return (try? regex.firstMatch(in: path)) != nil
+            }
+            return path.localizedCaseInsensitiveContains(pattern)
         }
-        return path.localizedCaseInsensitiveContains(pattern)
     }
 }
 
